@@ -8,7 +8,7 @@ import os
 import numpy as np
 
 app = Flask(__name__)
-app.secret_key = "rising_waters_secret_key"
+app.secret_key = os.getenv("SECRET_KEY", "rising_waters_secret_key")
 
 # ==========================
 # LOAD MODEL & SCALER
