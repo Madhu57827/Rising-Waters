@@ -1,0 +1,155 @@
+.dashboard-section{
+
+    padding:120px 0 80px;
+    background:#f8fafc;
+    min-height:100vh;
+
+}
+
+/* Welcome Card */
+
+.welcome-card{
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    color:white;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    box-shadow:0 15px 30px rgba(37,99,235,.2);
+
+}
+
+.welcome-card h2{
+
+    font-weight:700;
+
+}
+
+.welcome-card p{
+
+    color:#e2e8f0;
+
+}
+
+/* Stats */
+
+.stat-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.stat-card i{
+
+    font-size:2rem;
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}
+
+.stat-card h3{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+}
+
+.stat-card.success i{
+
+    color:#16a34a;
+
+}
+
+.stat-card.danger i{
+
+    color:#dc2626;
+
+}
+
+/* Recent */
+
+.recent-card{
+
+    background:white;
+
+    margin-top:30px;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.recent-card h4{
+
+    margin:0;
+
+}
+
+.table{
+
+    margin-top:10px;
+
+}
+
+.table thead{
+
+    background:#2563eb;
+    color:white;
+
+}
+
+.table th,
+.table td{
+
+    vertical-align:middle;
+
+}
+
+@media(max-width:768px){
+
+.welcome-card{
+
+    text-align:center;
+
+    gap:20px;
+
+}
+
+}

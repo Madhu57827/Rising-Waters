@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-section">
+
+    <div class="container">
+
+        <!-- Welcome Card -->
+
+        <div class="welcome-card">
+
+            <div>
+                <h2>
+                    Welcome, {{ session.get('name', 'User') }} 👋
+                </h2>
+
+                <p>
+                    Monitor flood predictions and track recent activities.
+                </p>
+            </div>
+
+            <a href="/predict" class="btn btn-primary">
+                <i class="fas fa-water"></i>
+                Predict Flood
+            </a>
+
+        </div>
+
+        <!-- Stats -->
+
+        <div class="row mt-4">
+
+            <div class="col-md-4 mb-4">
+
+                <div class="stat-card">
+
+                    <i class="fas fa-chart-line"></i>
+
+                    <h3>{{ total_predictions }}</h3>
+
+                    <p>Total Predictions</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 mb-4">
+
+                <div class="stat-card danger">
+
+                    <i class="fas fa-exclamation-triangle"></i>
+
+                    <h3>{{ flood_count }}</h3>
+
+                    <p>Flood Alerts</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 mb-4">
+
+                <div class="stat-card success">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <h3>{{ safe_count }}</h3>
+
+                    <p>Safe Predictions</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Recent Predictions -->
+
+        <div class="recent-card">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <h4>Recent Predictions</h4>
+
+                <a href="/history" class="btn btn-outline-primary btn-sm">
+                    View All
+                </a>
+
+            </div>
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Prediction</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for row in history %}
+
+                    <tr>
+
+                        <td>{{ row.result }}</td>
+
+                        <td>
+
+                        {% if row.result == "Flood Risk" %}
+
+                            <span class="badge bg-danger">
+                                Alert
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-success">
+                                Safe
+                            </span>
+
+                        {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+
+<section class="py-5 mt-5">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="text-center mb-5">
+
+            <h1 class="fw-bold">About Flood Prediction System</h1>
+
+            <p class="text-muted">
+                Using Artificial Intelligence to predict floods and improve disaster preparedness.
+            </p>
+
+        </div>
+
+        <!-- About -->
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <img src="{{ url_for('static', filename='images/flood.png') }}"
+                     class="img-fluid rounded shadow">
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <h2 class="fw-bold mb-3">
+                    Our Mission
+                </h2>
+
+                <p>
+
+                    The Flood Prediction System is an AI-powered web application
+                    that predicts flood risks based on environmental and climatic
+                    conditions. It helps users understand potential flood threats
+                    before they occur, supporting early preparedness and decision-making.
+
+                </p>
+
+                <p>
+
+                    Our goal is to combine Machine Learning with an easy-to-use
+                    interface to provide accurate and timely flood predictions.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Technologies -->
+
+        <div class="mt-5">
+
+            <h2 class="text-center fw-bold mb-4">
+                Technologies Used
+            </h2>
+
+            <div class="row">
+
+                <div class="col-md-3 mb-4">
+
+                    <div class="card text-center shadow-sm p-4">
+
+                        <i class="fab fa-python fa-3x text-primary mb-3"></i>
+
+                        <h5>Python</h5>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 mb-4">
+
+                    <div class="card text-center shadow-sm p-4">
+
+                        <i class="fas fa-flask fa-3x text-success mb-3"></i>
+
+                        <h5>Flask</h5>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 mb-4">
+
+                    <div class="card text-center shadow-sm p-4">
+
+                        <i class="fas fa-brain fa-3x text-danger mb-3"></i>
+
+                        <h5>XGBoost</h5>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 mb-4">
+
+                    <div class="card text-center shadow-sm p-4">
+
+                        <i class="fas fa-database fa-3x text-warning mb-3"></i>
+
+                        <h5>SQLite</h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Features -->
+
+        <div class="mt-5">
+
+            <h2 class="text-center fw-bold mb-4">
+
+                Key Features
+
+            </h2>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <ul class="list-group">
+
+                        <li class="list-group-item">✔ Secure Login & Signup</li>
+
+                        <li class="list-group-item">✔ AI-Based Flood Prediction</li>
+
+                        <li class="list-group-item">✔ Prediction History</li>
+
+                    </ul>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <ul class="list-group">
+
+                        <li class="list-group-item">✔ User Dashboard</li>
+
+                        <li class="list-group-item">✔ Responsive Design</li>
+
+                        <li class="list-group-item">✔ SQLite Database</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

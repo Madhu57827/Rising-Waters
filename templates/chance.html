@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Flood Risk Detected{% endblock %}
+
+{% block content %}
+
+<section class="result-section">
+
+    <div class="container">
+
+        <div class="result-card danger text-center">
+
+            <i class="fas fa-triangle-exclamation fa-5x mb-4"></i>
+
+            <h1>High Flood Risk Detected!</h1>
+
+            <p class="lead mt-3">
+                Based on the entered environmental parameters,
+                there is a high possibility of flooding.
+            </p>
+
+            <hr>
+
+            <h4>Safety Tips</h4>
+
+            <ul class="list-group mt-3">
+
+                <li class="list-group-item">
+                    Stay away from rivers and low-lying areas.
+                </li>
+
+                <li class="list-group-item">
+                    Keep emergency supplies ready.
+                </li>
+
+                <li class="list-group-item">
+                    Follow local weather alerts.
+                </li>
+
+                <li class="list-group-item">
+                    Evacuate immediately if instructed.
+                </li>
+
+            </ul>
+
+            <a href="/predict" class="btn btn-danger mt-4">
+                Predict Again
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

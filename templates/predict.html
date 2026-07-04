@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Flood{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/predict.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2 class="text-center mb-4">🌊 Flood Prediction System</h2>
+
+    <div class="card p-4">
+
+        <form method="POST" action="/predict">
+
+            <div class="row">
+
+                <!-- LEFT COLUMN -->
+                <div class="col-md-6">
+
+                    <label>Temperature</label>
+                    <input type="number" step="any" name="temp" class="form-control" required>
+
+                    <label>Humidity</label>
+                    <input type="number" step="any" name="humidity" class="form-control" required>
+
+                    <label>Cloud Cover</label>
+                    <input type="number" step="any" name="cloud_cover" class="form-control" required>
+
+                    <label>Annual Rainfall</label>
+                    <input type="number" step="any" name="annual" class="form-control" required>
+
+                    <label>Jan-Feb</label>
+                    <input type="number" step="any" name="jan_feb" class="form-control" required>
+
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="col-md-6">
+
+                    <label>Mar-May</label>
+                    <input type="number" step="any" name="mar_may" class="form-control" required>
+
+                    <label>Jun-Sep</label>
+                    <input type="number" step="any" name="jun_sep" class="form-control" required>
+
+                    <label>Oct-Dec</label>
+                    <input type="number" step="any" name="oct_dec" class="form-control" required>
+
+                    <label>Avg June</label>
+                    <input type="number" step="any" name="avgjune" class="form-control" required>
+
+                    <label>Sub Region</label>
+                    <input type="number" step="any" name="sub" class="form-control" required>
+
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mt-4">
+                Predict Flood Risk
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
