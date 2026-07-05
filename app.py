@@ -320,7 +320,7 @@ def profile():
 # PREDICT
 # ==========================
 
-@app.route("/predict", methods=["GET","POST"])
+@app.route("/predict", methods=["GET", "POST"])
 def predict():
 
     check = login_required()
@@ -343,7 +343,53 @@ def predict():
         avgjune = float(request.form["avgjune"])
         sub = float(request.form["sub"])
 
-        features = np.array([[
+        # Create DataFrame with the SAME column names as the dataset
+        features = pd.DataFrame([{
+            "Temp": temp,
+            "Humidity": humidity,
+            "Cloud Cover": cloud_cover,
+            "ANNUAL": annual,
+            "Jan-Feb": jan_feb,
+            "Mar-May": mar_may,
+            "Jun-Sep": jun_sep,
+            "Oct-Dec": oct_dec,
+            "avgjune": avgjune,
+            "sub": sub
+        }])
+
+        if scaler is None or model is None:
+            flash("Model not found. Train the model first.", "danger")
+            return redirect(url_for("predict"))
+
+        scaled = scaler.transform(features)
+
+        prediction = model.predict(scaled)[0]
+        confidence = float(model.predict_proba(scaled)[0].max()) * 100
+
+        result = "Flood Risk" if prediction == 1 else "Safe"
+
+        conn = get_connection()
+
+        conn.execute("""
+            INSERT INTO predictions (
+                user_id,
+                temp,
+                humidity,
+                cloud_cover,
+                annual,
+                jan_feb,
+                mar_may,
+                jun_sep,
+                oct_dec,
+                avgjune,
+                sub,
+                result,
+                confidence,
+                created_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            session["user_id"],
             temp,
             humidity,
             cloud_cover,
@@ -353,97 +399,28 @@ def predict():
             jun_sep,
             oct_dec,
             avgjune,
-            sub
-        ]])
-
-        if scaler is None or model is None:
-
-            flash(
-                "Model not found. Train the model first.",
-                "danger"
-            )
-
-            return redirect(url_for("predict"))
-
-        scaled = scaler.transform(features)
-        prediction = model.predict(scaled)[0]
-        confidence = float(model.predict_proba(scaled)[0].max()) * 100
-
-        result = "Flood Risk" if prediction == 1 else "Safe"
-
-        conn = get_connection()
-
-        conn.execute("""
-
-        INSERT INTO predictions(
-
-        user_id,
-
-        temp,
-        humidity,
-        cloud_cover,
-        annual,
-        jan_feb,
-        mar_may,
-        jun_sep,
-        oct_dec,
-        avgjune,
-        sub,
-
-        result,
-        confidence,
-        created_at
-
-        )
-
-        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-
-        """,
-
-        (
-
-        session["user_id"],
-
-        temp,
-        humidity,
-        cloud_cover,
-        annual,
-        jan_feb,
-        mar_may,
-        jun_sep,
-        oct_dec,
-        avgjune,
-        sub,
-
-        result,
-        round(confidence,2),
-        datetime.now().strftime("%d-%m-%Y %H:%M")
-
-        )
-
-        )
+            sub,
+            result,
+            round(confidence, 2),
+            datetime.now().strftime("%d-%m-%Y %H:%M")
+        ))
 
         conn.commit()
         conn.close()
 
         if prediction == 1:
-
             return render_template(
                 "chance.html",
-                confidence=round(confidence,2)
+                confidence=round(confidence, 2)
             )
-
         else:
-
             return render_template(
                 "no_chance.html",
-                confidence=round(confidence,2)
+                confidence=round(confidence, 2)
             )
 
     except Exception as e:
-
-        flash(str(e),"danger")
-
+        flash(str(e), "danger")
         return redirect(url_for("predict"))
     # ==========================
 # HISTORY
