@@ -8,65 +8,98 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container py-5">
 
-    <h2 class="text-center mb-4">🌊 Flood Prediction System</h2>
+    <div class="row justify-content-center">
 
-    <div class="card p-4">
+        <div class="col-lg-10 col-xl-9">
 
-        <form method="POST" action="/predict">
+            <div class="card shadow-lg border-0 rounded-4">
 
-            <div class="row">
+                <div class="card-body p-5">
 
-                <!-- LEFT COLUMN -->
-                <div class="col-md-6">
+                    <h2 class="text-center mb-2">
+                        🌊 Flood Prediction System
+                    </h2>
 
-                    <label>Temperature</label>
-                    <input type="number" step="any" name="temp" class="form-control" required>
+                    <p class="text-center text-muted mb-4">
+                        Enter the required weather and rainfall details.
+                    </p>
 
-                    <label>Humidity</label>
-                    <input type="number" step="any" name="humidity" class="form-control" required>
+                    <form method="POST" action="{{ url_for('predict') }}">
 
-                    <label>Cloud Cover</label>
-                    <input type="number" step="any" name="cloud_cover" class="form-control" required>
+                        <div class="row">
 
-                    <label>Annual Rainfall</label>
-                    <input type="number" step="any" name="annual" class="form-control" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Temperature (°C)</label>
+                                <input type="number" step="any" name="temp" class="form-control" required>
+                            </div>
 
-                    <label>Jan-Feb</label>
-                    <input type="number" step="any" name="jan_feb" class="form-control" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Humidity (%)</label>
+                                <input type="number" step="any" name="humidity" class="form-control" required>
+                            </div>
 
-                </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Cloud Cover (%)</label>
+                                <input type="number" step="any" name="cloud_cover" class="form-control" required>
+                            </div>
 
-                <!-- RIGHT COLUMN -->
-                <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Annual Rainfall (mm)</label>
+                                <input type="number" step="any" name="annual" class="form-control" required>
+                            </div>
 
-                    <label>Mar-May</label>
-                    <input type="number" step="any" name="mar_may" class="form-control" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Jan-Feb Rainfall (mm)</label>
+                                <input type="number" step="any" name="jan_feb" class="form-control" required>
+                            </div>
 
-                    <label>Jun-Sep</label>
-                    <input type="number" step="any" name="jun_sep" class="form-control" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mar-May Rainfall (mm)</label>
+                                <input type="number" step="any" name="mar_may" class="form-control" required>
+                            </div>
 
-                    <label>Oct-Dec</label>
-                    <input type="number" step="any" name="oct_dec" class="form-control" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Jun-Sep Rainfall (mm)</label>
+                                <input type="number" step="any" name="jun_sep" class="form-control" required>
+                            </div>
 
-                    <label>Avg June</label>
-                    <input type="number" step="any" name="avgjune" class="form-control" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Oct-Dec Rainfall (mm)</label>
+                                <input type="number" step="any" name="oct_dec" class="form-control" required>
+                            </div>
 
-                    <label>Sub Region</label>
-                    <input type="number" step="any" name="sub" class="form-control" required>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Average June Rainfall (mm)</label>
+                                <input type="number" step="any" name="avgjune" class="form-control" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Sub Region</label>
+                                <input type="number" step="any" name="sub" class="form-control" required>
+                            </div>
+
+                        </div>
+
+                        <div class="d-grid mt-4">
+
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                🔍 Predict Flood Risk
+                            </button>
+
+                        </div>
+
+                    </form>
 
                 </div>
 
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 mt-4">
-                Predict Flood Risk
-            </button>
-
-        </form>
+        </div>
 
     </div>
+
 </div>
 
 {% endblock %}
