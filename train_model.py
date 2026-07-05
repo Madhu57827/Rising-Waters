@@ -3,7 +3,7 @@ import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, classification_report
 from xgboost import XGBClassifier
 
 # ==========================
@@ -24,10 +24,23 @@ print(df.head())
 df = df.dropna()
 
 # ==========================
-# FEATURES & TARGET
+# SELECT FEATURES
 # ==========================
 
-X = df.drop("flood", axis=1)
+feature_columns = [
+    "Temp",
+    "Humidity",
+    "Cloud Cover",
+    "ANNUAL",
+    "Jan-Feb",
+    "Mar-May",
+    "Jun-Sep",
+    "Oct-Dec",
+    "avgjune",
+    "sub"
+]
+
+X = df[feature_columns]
 y = df["flood"]
 
 # ==========================
@@ -73,7 +86,8 @@ pred = model.predict(X_test_scaled)
 
 accuracy = accuracy_score(y_test, pred)
 
-print(f"\nAccuracy : {accuracy*100:.2f}%")
+print(f"\nAccuracy : {accuracy * 100:.2f}%")
+print(classification_report(y_test, pred))
 
 # ==========================
 # SAVE MODEL
